@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Ivy Lee Method</string>
+	<string name="action_settings">Show completed tasks</string>
+	<string name="about">About</string>
+	<string name="title">Title</string>
+	<string name="content">Content</string>
+	<string name="save">Save</string>
+	<string name="delete">Delete</string>
+	<string name="cancel">Cancel</string>
+
+	<string name="your_task_is_completed_">Your task is completed?</string>
+
+	<string name="title_new_task">new Task</string>
+	<string name="title_delete_task">delete Task</string>
+	<string name="message_delete_task">Are you sure you want to delete your task?</string>
+
+	<string name="toast_empty_task">You must input a title :(</string>
+	<string name="toast_max_tasks">You can add up to 6 tasks :(</string>
+</resources>
