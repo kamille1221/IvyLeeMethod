@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 /**
- * Created by David on 2018-05-03.
+ * Created by Kamille on 2018-05-03.
  **/
 
 open class Task: RealmObject() {
@@ -13,5 +13,6 @@ open class Task: RealmObject() {
 	open var completed: Boolean = false
 	open var title: String = ""
 	open var content: String = ""
+	open var priority: Int = 0
 	open var date: Int = 19700101
 }

@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by David on 2018-05-15.
+ * Created by Kamille on 2018-05-15.
  */
 object TaskUtils {
 	private const val PREFERENCE_NAME = "com.gmail.kamille1221.ivyleemethod"

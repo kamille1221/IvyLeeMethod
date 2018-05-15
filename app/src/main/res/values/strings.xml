@@ -8,6 +8,7 @@
 	<string name="save">Save</string>
 	<string name="delete">Delete</string>
 	<string name="cancel">Cancel</string>
+	<string name="update">Update</string>
 
 	<string name="your_task_is_completed_">Your task is completed?</string>
 
@@ -17,4 +18,7 @@
 
 	<string name="toast_empty_task">You must input a title :(</string>
 	<string name="toast_max_tasks">You can add up to 6 tasks :(</string>
+	<string name="title_about">Ivy Lee Method</string>
+	<string name="subtitle_about">This application inspired from  <a href="https://jamesclear.com/ivy-lee">Ivy Lee Method</a>.</string>
+	<string name="open_source_license"><u>OpenSource License</u></string>
 </resources>

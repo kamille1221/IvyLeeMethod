@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.card_task.view.*
 import java.util.*
 
 /**
- * Created by David on 2018-05-03.
+ * Created by Kamille on 2018-05-03.
  **/
 
 class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var realm: Realm, autoUpdate: Boolean = true): RealmRecyclerViewAdapter<Task, RecyclerView.ViewHolder>(mContext, mTasks as OrderedRealmCollection<Task>?, autoUpdate), TaskItemTouchHelperCallback.OnItemMoveListener {
@@ -40,7 +40,7 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 			val task: Task? = mTasks[position]
 			if (task != null) {
 				when (clickType) {
-					CLICK -> updateRealm(task.id, !task.completed, task.title, task.content, task.date)
+					CLICK -> updateRealm(task.id, !task.completed, task.title, task.content, task.priority, task.date)
 					LONG_CLICK -> deleteRealm(task.id)
 				}
 			}
@@ -48,8 +48,13 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 	}
 
 	override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
-		Collections.swap(mTasks, fromPosition, toPosition)
+		val tasks: List<Task> = mTasks.toList()
+		Collections.swap(tasks, fromPosition, toPosition)
 		notifyItemMoved(fromPosition, toPosition)
+		for (i in 0 until tasks.size) {
+			val task: Task = tasks[i]
+			updateRealm(task.id, task.completed, task.title, task.content, i, task.date)
+		}
 		return true
 	}
 
@@ -57,20 +62,23 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 		itemView.setOnClickListener {
 			event.invoke(adapterPosition, itemViewType, CLICK)
 		}
-		itemView.setOnLongClickListener {
-			event.invoke(adapterPosition, itemViewType, LONG_CLICK)
-			true
-		}
+		/*
+				itemView.setOnLongClickListener {
+					event.invoke(adapterPosition, itemViewType, LONG_CLICK)
+					true
+				}
+		*/
 		return this
 	}
 
-	private fun updateRealm(id: Int, completed: Boolean, title: String, content: String, date: Int) {
+	private fun updateRealm(id: Int, completed: Boolean, title: String, content: String, priority: Int, date: Int) {
 		realm.beginTransaction()
 		val task: Task? = realm.where(Task::class.java).equalTo("id", id).findFirst()
 		if (task != null) {
 			task.completed = completed
 			task.title = title
 			task.content = content
+			task.priority = priority
 			task.date = date
 			realm.copyToRealmOrUpdate(task)
 			realm.commitTransaction()

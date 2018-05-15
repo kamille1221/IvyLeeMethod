@@ -2,7 +2,6 @@
 <android.support.v7.widget.CardView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:clickable="true"
@@ -36,8 +35,7 @@
 				android:layout_height="wrap_content"
 				android:padding="8dp"
 				android:textColor="@color/textColorPrimary"
-				android:textSize="18sp"
-				tools:text="일정제목은여기에입력됩니다."/>
+				android:textSize="18sp"/>
 
 			<TextView
 				android:id="@+id/tvDate"
@@ -45,8 +43,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
 				android:textColor="@color/textColorSecondary"
-				android:textSize="14sp"
-				tools:text="12. 21. 1990"/>
+				android:textSize="14sp"/>
 		</LinearLayout>
 	</LinearLayout>
 </android.support.v7.widget.CardView>

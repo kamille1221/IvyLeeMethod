@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="16dp"
+	tools:context=".AboutActivity">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:text="@string/title_about"
+			android:textColor="@color/textColorPrimary"
+			android:textSize="24sp"/>
+
+		<TextView
+			android:id="@+id/tvVersion"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textColor="@color/textColorSecondary"
+			android:textSize="16sp"
+			tools:text="Version 1.1"/>
+
+		<Button
+			android:id="@+id/btnUpdate"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:text="@string/update"
+			android:textSize="16sp"
+			android:visibility="invisible"/>
+
+		<TextView
+			android:id="@+id/tvInspiration"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:text="@string/subtitle_about"
+			android:textColor="@color/textColorPrimary"
+			android:textSize="16sp"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/tvLicense"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:text="@string/open_source_license"
+		android:textColor="@color/textColorPrimary"
+		android:textSize="16sp"/>
+</LinearLayout>

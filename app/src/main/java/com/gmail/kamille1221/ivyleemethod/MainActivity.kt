@@ -1,6 +1,7 @@
 package com.gmail.kamille1221.ivyleemethod
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -11,6 +12,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
@@ -22,8 +25,9 @@ import kotlinx.android.synthetic.main.dialog_add_task.view.*
 import java.util.*
 import kotlin.properties.Delegates
 
+
 /**
- * Created by David on 2018-05-03.
+ * Created by Kamille on 2018-05-03.
  **/
 class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 	private lateinit var mAdapter: TaskAdapter
@@ -36,6 +40,7 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
+		Fabric.with(this, Crashlytics())
 		initRealm()
 
 		showCompletedTask = TaskUtils.isShowCompletedTask(this)
@@ -54,12 +59,9 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 
 		fabAdd.setOnClickListener { addTask() }
 
-		/*
-		// Collections.swap() is not supported by 'RealmResults' or 'OrderedRealmCollectionSnapshot'
 		val mCallback = TaskItemTouchHelperCallback(mAdapter)
 		mItemTouchHelper = ItemTouchHelper(mCallback)
 		mItemTouchHelper.attachToRecyclerView(rvTasks)
-		*/
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,6 +77,10 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 				item.isChecked = showCompletedTask
 				TaskUtils.setShowCompletedTask(this, item.isChecked)
 				refreshTasks(-1)
+				true
+			}
+			R.id.action_about -> {
+				startActivity(Intent(this, AboutActivity::class.java))
 				true
 			}
 			else ->
@@ -99,17 +105,17 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 
 	private fun getTasks(showCompletedTask: Boolean): RealmResults<Task> {
 		return if (showCompletedTask) {
-			realm.where(Task::class.java).findAll().sort("id", Sort.DESCENDING)
+			realm.where(Task::class.java).findAll().sort("priority", Sort.ASCENDING)
 		} else {
-			realm.where(Task::class.java).equalTo("completed", false).findAll().sort("id", Sort.DESCENDING)
+			realm.where(Task::class.java).equalTo("completed", false).findAll().sort("priority", Sort.ASCENDING)
 		}
 	}
 
 	private fun getTasks(showCompletedTask: Boolean, date: Int): RealmResults<Task> {
 		return if (showCompletedTask) {
-			var result: RealmResults<Task> = realm.where(Task::class.java).lessThanOrEqualTo("date", date).findAll().sort("id", Sort.DESCENDING)
+			var result: RealmResults<Task> = realm.where(Task::class.java).lessThanOrEqualTo("date", date).findAll().sort("priority", Sort.ASCENDING)
 			if (result.size > 6) {
-				result = realm.where(Task::class.java).equalTo("date", date).findAll().sort("id", Sort.DESCENDING)
+				result = realm.where(Task::class.java).equalTo("date", date).findAll().sort("priority", Sort.ASCENDING)
 				if (result.size > 6) {
 					result.subList(0, 6) as RealmResults<Task>
 				} else {
@@ -119,9 +125,9 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 				result
 			}
 		} else {
-			var result: RealmResults<Task> = realm.where(Task::class.java).equalTo("completed", false).lessThanOrEqualTo("date", date).findAll().sort("id", Sort.DESCENDING)
+			var result: RealmResults<Task> = realm.where(Task::class.java).equalTo("completed", false).lessThanOrEqualTo("date", date).findAll().sort("priority", Sort.ASCENDING)
 			if (result.size > 6) {
-				result = realm.where(Task::class.java).equalTo("completed", false).equalTo("date", date).findAll().sort("id", Sort.DESCENDING)
+				result = realm.where(Task::class.java).equalTo("completed", false).equalTo("date", date).findAll().sort("priority", Sort.ASCENDING)
 				if (result.size > 6) {
 					result.subList(0, 6) as RealmResults<Task>
 				} else {
@@ -153,6 +159,7 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 		task.completed = completed
 		task.title = title
 		task.content = content
+		task.priority = 0
 		task.date = date
 		realm.commitTransaction()
 	}

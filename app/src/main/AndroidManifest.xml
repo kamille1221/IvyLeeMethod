@@ -3,6 +3,7 @@
           package="com.gmail.kamille1221.ivyleemethod">
 
 	<uses-permission android:name="android.permission.INTERNET"/>
+
 	<application
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
@@ -19,8 +20,14 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
+
+		<activity
+			android:name=".AboutActivity"/>
+
 		<meta-data
 			android:name="io.fabric.ApiKey"
 			android:value="2fcfacf2ba6033f216fd8c14039fa8a1b1c06656"/>
+
 	</application>
+
 </manifest>

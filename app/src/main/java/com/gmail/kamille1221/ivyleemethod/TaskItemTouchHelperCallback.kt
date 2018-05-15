@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 
 /**
- * Created by David on 2018-05-03.
+ * Created by Kamille on 2018-05-03.
  **/
 class TaskItemTouchHelperCallback(private val mItemMoveListener: TaskItemTouchHelperCallback.OnItemMoveListener): ItemTouchHelper.Callback() {
 	override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
