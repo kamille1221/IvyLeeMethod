@@ -6,7 +6,6 @@ import io.realm.annotations.PrimaryKey
 /**
  * Created by Kamille on 2018-05-03.
  **/
-
 open class Task: RealmObject() {
 	@PrimaryKey
 	open var id: Int = -1

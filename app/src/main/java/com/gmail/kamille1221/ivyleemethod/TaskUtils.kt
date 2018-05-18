@@ -15,7 +15,6 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 /**
  * Created by Kamille on 2018-05-15.
  */

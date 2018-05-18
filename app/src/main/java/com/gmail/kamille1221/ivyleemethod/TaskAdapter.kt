@@ -81,7 +81,7 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 		val resource: Int = R.layout.dialog_add_task
 		val view = LayoutInflater.from(context).inflate(resource, null)
 		val builder = AlertDialog.Builder(context)
-		builder.setTitle(context.getString(R.string.title_new_task))
+		builder.setTitle(context.getString(R.string.title_modify_task))
 		builder.setView(view)
 		builder.setPositiveButton(context.getString(R.string.save), null)
 		builder.setNeutralButton(context.getString(R.string.delete), null)
@@ -100,7 +100,7 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 				if (TextUtils.isEmpty(title)) {
 					Toast.makeText(context, context.getString(R.string.toast_empty_task), Toast.LENGTH_SHORT).show()
 				} else {
-					updateRealm(task.id, completed, title, content, task.date, task.date)
+					updateRealm(task.id, completed, title, content, task.priority, task.date)
 					dialog.dismiss()
 				}
 			}
