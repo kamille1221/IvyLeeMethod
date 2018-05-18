@@ -70,7 +70,7 @@ object TaskUtils {
 		override fun onPostExecute(result: Boolean) {
 			super.onPostExecute(result)
 			val btnUpdate: Button? = btnReference.get()
-			btnUpdate?.visibility = if (current != store && result) {
+			btnUpdate?.visibility = if (result && current != store) {
 				View.VISIBLE
 			} else {
 				View.GONE

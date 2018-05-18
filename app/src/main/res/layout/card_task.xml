@@ -7,7 +7,7 @@
 	android:layout_height="wrap_content"
 	android:clickable="true"
 	android:focusable="true"
-	android:foreground="?attr/selectableItemBackgroundBorderless"
+	android:foreground="?android:attr/selectableItemBackgroundBorderless"
 	app:cardUseCompatPadding="true">
 
 	<LinearLayout
