@@ -20,10 +20,22 @@ class TaskItemTouchHelperCallback(private val mItemMoveListener: TaskItemTouchHe
 		return true
 	}
 
+	override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+		super.onSelectedChanged(viewHolder, actionState)
+		if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
+			mItemMoveListener.onItemMoved()
+		}
+	}
+
 	override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+	}
+
+	override fun isLongPressDragEnabled(): Boolean {
+		return true
 	}
 
 	interface OnItemMoveListener {
 		fun onItemMove(fromPosition: Int, toPosition: Int): Boolean
+		fun onItemMoved()
 	}
 }

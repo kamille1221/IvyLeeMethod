@@ -10,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.crashlytics.android.Crashlytics
@@ -24,7 +25,6 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.dialog_add_task.view.*
 import java.util.*
 import kotlin.properties.Delegates
-
 
 /**
  * Created by Kamille on 2018-05-03.
@@ -179,17 +179,17 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 		builder.setView(view)
 		builder.setPositiveButton(getString(R.string.save), null)
 		builder.setNegativeButton(getString(R.string.cancel), null)
+		view.llCompleted.visibility = View.GONE
 		val alertDialog: AlertDialog = builder.create()
 		alertDialog.setOnShowListener { dialog ->
 			val positiveButton: Button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
 			positiveButton.setOnClickListener {
-				val completed: Boolean = view.swComplete.isChecked
 				val title: String = view.etTitle.text.toString()
 				val content: String = view.etContent.text.toString()
 				if (TextUtils.isEmpty(title)) {
 					Toast.makeText(this, getString(R.string.toast_empty_task), Toast.LENGTH_SHORT).show()
 				} else {
-					commitRealm(completed, title, content, date)
+					commitRealm(false, title, content, date)
 					dialog.dismiss()
 				}
 			}
