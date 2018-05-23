@@ -1,11 +1,9 @@
-# IvyLeeMethod
+# Ivy Lee Method: TOday-DO
+* I didn't decide the app name. It can be changed continuously :)
 
-This application inspired from [Ivy Lee Method](https://jamesclear.com/ivy-lee)
+This application inspired from [Ivy Lee Method](https://jamesclear.com/ivy-lee).
 
-To-do List
-- Set working day
-- Separate createDate and workDate
-- Move task to next working day (automatically?)
-- ~~Task priority~~
-- ~~Show task detail (is comment necessary?)~~
-- ~~Delete task (already implement complete, do I need to implement delete?)~~
+- Every work day, add up to 6 tasks.
+- Reorder tasks by priority.
+- Focus first task until task is complete.
+- If task is completed, check the task and move on to the second task.

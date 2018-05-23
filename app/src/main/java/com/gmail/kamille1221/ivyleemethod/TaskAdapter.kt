@@ -1,6 +1,7 @@
 package com.gmail.kamille1221.ivyleemethod
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Paint
 import android.support.v7.widget.RecyclerView
@@ -81,6 +82,7 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 		val resource: Int = R.layout.dialog_add_task
 		val view = LayoutInflater.from(context).inflate(resource, null)
 		val builder = AlertDialog.Builder(context)
+		var date: Int = task.date
 		builder.setTitle(context.getString(R.string.title_modify_task))
 		builder.setView(view)
 		builder.setPositiveButton(context.getString(R.string.save), null)
@@ -90,6 +92,17 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 		view.etContent.setText(task.content)
 		view.swCompleted.isChecked = task.completed
 		view.llCompleted.visibility = View.VISIBLE
+		view.etDate.setText(TaskUtils.dateIntToString(date))
+		view.etDate.setOnClickListener {
+			val selectedYear: Int = date / 10000
+			val selectedMonth: Int = date / 100 % 100 - 1
+			val selectedDayOfMonth: Int = date % 100
+			val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+				date = year * 10000 + (month + 1) * 100 + dayOfMonth
+				view.etDate.setText(TaskUtils.dateIntToString(date))
+			}, selectedYear, selectedMonth, selectedDayOfMonth)
+			datePickerDialog.show()
+		}
 		val alertDialog: AlertDialog = builder.create()
 		alertDialog.setOnShowListener { dialog ->
 			val positiveButton: Button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -100,7 +113,7 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 				if (TextUtils.isEmpty(title)) {
 					Toast.makeText(context, context.getString(R.string.toast_empty_task), Toast.LENGTH_SHORT).show()
 				} else {
-					updateRealm(task.id, completed, title, content, task.priority, task.date)
+					updateRealm(task.id, completed, title, content, task.priority, date)
 					dialog.dismiss()
 				}
 			}

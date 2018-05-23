@@ -1,6 +1,7 @@
 package com.gmail.kamille1221.ivyleemethod
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -35,6 +36,7 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 	private var showCompletedTask: Boolean = true
 	private var realm: Realm by Delegates.notNull()
 	private var realmConfig: RealmConfiguration by Delegates.notNull()
+	private var selectedDate: Int = -1
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -49,8 +51,8 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 		setSupportActionBar(actionBar)
 
 		cvTasks.setOnDateChangeListener { _, year, month, dayOfMonth ->
-			val date: Int = year * 10000 + (month + 1) * 100 + dayOfMonth
-			refreshTasks(date)
+			selectedDate = year * 10000 + (month + 1) * 100 + dayOfMonth
+			refreshTasks(selectedDate)
 		}
 
 		rvTasks.setHasFixedSize(true)
@@ -165,8 +167,12 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 	}
 
 	private fun addTask() {
-		val today: Calendar = Calendar.getInstance()
-		val date: Int = today.get(Calendar.YEAR) * 10000 + (today.get(Calendar.MONTH) + 1) * 100 + today.get(Calendar.DAY_OF_MONTH)
+		var date: Int = if (selectedDate > 0) {
+			selectedDate
+		} else {
+			val today: Calendar = Calendar.getInstance()
+			today.get(Calendar.YEAR) * 10000 + (today.get(Calendar.MONTH) + 1) * 100 + today.get(Calendar.DAY_OF_MONTH)
+		}
 		val tasks = getTasks(false, date)
 		if (tasks.size >= 6) {
 			Toast.makeText(this, R.string.toast_max_tasks, Toast.LENGTH_SHORT).show()
@@ -180,6 +186,17 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 		builder.setPositiveButton(getString(R.string.save), null)
 		builder.setNegativeButton(getString(R.string.cancel), null)
 		view.llCompleted.visibility = View.GONE
+		view.etDate.setText(TaskUtils.dateIntToString(date))
+		view.etDate.setOnClickListener {
+			val selectedYear: Int = date / 10000
+			val selectedMonth: Int = date / 100 % 100 - 1
+			val selectedDayOfMonth: Int = date % 100
+			val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+				date = year * 10000 + (month + 1) * 100 + dayOfMonth
+				view.etDate.setText(TaskUtils.dateIntToString(date))
+			}, selectedYear, selectedMonth, selectedDayOfMonth)
+			datePickerDialog.show()
+		}
 		val alertDialog: AlertDialog = builder.create()
 		alertDialog.setOnShowListener { dialog ->
 			val positiveButton: Button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
