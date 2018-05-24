@@ -63,10 +63,12 @@ class TaskAdapter(mContext: Context, private var mTasks: RealmResults<Task>, var
 	}
 
 	override fun onItemMoved() {
-		if (tasks != null && tasks!!.isNotEmpty()) {
-			for (i in 0 until tasks!!.size) {
-				val task: Task = tasks!![i]
-				updateRealm(task.id, task.completed, task.title, task.content, i, task.date)
+		if (tasks != null && tasks?.isNotEmpty() == true) {
+			for (i in 0 until (tasks?.size ?: 0)) {
+				val task: Task? = tasks?.get(i)
+				if (task != null) {
+					updateRealm(task.id, task.completed, task.title, task.content, i, task.date)
+				}
 			}
 		}
 	}
