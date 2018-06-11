@@ -1,13 +1,3 @@
-#built application files
-*.apk
-*.ap_
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
 # generated files
 bin/
 gen/
@@ -26,22 +16,8 @@ Thumbs.db
 .project
 
 # Android Studio
+.iml
+.idea/*
 *.iml
-**/.idea/workspace.xml
-**/.idea/misc.xml
-**/.idea/modules.xml
-**/.idea/tasks.xml
-**/.idea/gradle-wrapper.properties
-**/.idea/gradle.xml
-.idea/copyright/
-.idea/kotlinc.xml
-.idea/libraries/
-.idea/shelf/
-.idea/.name
 .gradle/
 build/
-
-#NDK
-/.idea/gradle.xml
-/.idea/vcs.xml
-obj/

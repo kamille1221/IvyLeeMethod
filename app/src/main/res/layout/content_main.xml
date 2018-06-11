@@ -17,7 +17,5 @@
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/rvTasks"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:paddingEnd="8dp"
-		android:paddingStart="8dp"/>
+		android:layout_height="match_parent"/>
 </LinearLayout>

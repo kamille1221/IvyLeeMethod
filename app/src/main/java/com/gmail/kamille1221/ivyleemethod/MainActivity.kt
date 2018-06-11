@@ -68,15 +68,26 @@ class MainActivity: AppCompatActivity(), TaskAdapter.OnStartDragListener {
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 		menuInflater.inflate(R.menu.menu_main, menu)
-		menu?.findItem(R.id.action_settings)?.isChecked = TaskUtils.isShowCompletedTask(this)
+		val showAllTaskMenu: MenuItem? = menu?.findItem(R.id.action_show_all_task)
+		showAllTaskMenu?.isChecked = TaskUtils.isShowCompletedTask(this)
+		showAllTaskMenu?.icon = if (TaskUtils.isShowCompletedTask(this)) {
+			getDrawable(R.drawable.ic_show_accent_24dp)
+		} else {
+			getDrawable(R.drawable.ic_hide_accent_24dp)
+		}
 		return true
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		return when (item?.itemId) {
-			R.id.action_settings -> {
+			R.id.action_show_all_task -> {
 				showCompletedTask = !showCompletedTask
 				item.isChecked = showCompletedTask
+				item.icon = if (showCompletedTask) {
+					getDrawable(R.drawable.ic_show_accent_24dp)
+				} else {
+					getDrawable(R.drawable.ic_hide_accent_24dp)
+				}
 				TaskUtils.setShowCompletedTask(this, item.isChecked)
 				refreshTasks(-1)
 				true

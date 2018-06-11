@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">오늘 할 일</string>
-	<string name="action_settings">끝낸 작업 보이기</string>
+	<string name="action_settings">설정</string>
 	<string name="about">정보</string>
 	<string name="title">제목</string>
 	<string name="content">내용</string>
@@ -11,6 +11,9 @@
 	<string name="cancel">취소</string>
 	<string name="version">버전 </string>
 	<string name="update">업데이트</string>
+	<string name="backup">백업</string>
+	<string name="restore">복원</string>
+	<string name="show_all_task">모든 작업 보이기</string>
 	<string name="open_source_license"><u>오픈 소스 라이선스</u></string>
 
 	<string name="your_task_is_completed_">끝난 작업인가요?</string>

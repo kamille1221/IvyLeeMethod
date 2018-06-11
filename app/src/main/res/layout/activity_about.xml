@@ -18,13 +18,13 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:layout_marginBottom="16dp"
 			android:contentDescription="@string/app_name"
 			android:src="@mipmap/ic_launcher"/>
 
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
 			android:gravity="center"
 			android:text="@string/app_name"
 			android:textColor="@color/textColorPrimary"
@@ -46,11 +46,7 @@
 			android:layout_gravity="center"
 			android:text="@string/update"
 			android:textSize="16sp"
-			android:visibility="invisible"/>
-
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
+			android:visibility="gone"/>
 	</LinearLayout>
 
 	<TextView
